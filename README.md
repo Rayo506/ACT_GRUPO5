@@ -1,37 +1,22 @@
 # ARQUITECTURA ORIENTADA A SERVICIOS 
 ## Curso 2025-26 
-## FastAPI Project
+## FigursAPI Project
 
+Utilizaremos una base de datos Docker, para almacenar los datos.
+Los POST’s y GET que podremos utilizar:
+GET /figuras (Recoge todas las figuras sin categorizar)
+GET /figuras/2 (Por ID)
+GET /figuras?categoria=anime (Mediante un parámetro)
 
-# FastAPI Project
+POST /figuras
+Content-Type: application/json
 
-This is a simple FastAPI-based project that includes GET and POST services. It includes:
-- A POST endpoint for processing JSON data.
-- A GET endpoint for concatenating two strings.
-- A GET endpoint for calculating the length of a string.
-
-## Project Structure
-
-```bash
-aossample/
-│
-├── app/
-│   ├── __init__.py           # Initializes the app as a package
-│   ├── main.py               # Main entry point for the FastAPI application
-│   ├── routes/
-│   │   ├── __init__.py       # Initializes the routes as a package
-│   │   └── sample.py         # Contains the API routes (POST/GET)
-│   ├── models/
-│   │   ├── __init__.py       
-│   │   └── item.py           # Defines the data models using Pydantic
-│   ├── tests/
-│   │   ├── __init__.py       
-│   │   └── test_sample.py    # Contains the unit tests for the API
-│   └── requirements.txt      # Dependencies for the project
-│
-├── venv/                     # Python virtual environment
-└── README.md                 # Project documentation
-```
+{
+  "nombre": "Luffy Gear 5",
+  "precio": 60.00,
+  "stock": 8,
+  "categoria": "Anime"
+}
 
 ## Project Setup
 
@@ -43,35 +28,11 @@ First, clone the project repository to your local machine:
 git clone https://github.com/mcastrol/aossample.git
 cd aossample
 ```
+## PARA SABER COMO FUNCIONA EL RUN DIRECTO DESDE GITHUB
+https://docs.github.com/es/codespaces/quickstart 
 
-### 2. **Create and Activate a Python Virtual Environment**
-
-Create a virtual environment to manage dependencies. This ensures that project-specific packages are isolated from your global Python environment.
-
-**On Linux/macOS**:
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-**On Windows**:
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
-
-### 3. **Install Dependencies from `requirements.txt`**
-
-Once the virtual environment is activated, install the project dependencies using `requirements.txt`.
-
-```bash
-pip install -r app/requirements.txt
-```
-
-This will install all the necessary packages such as FastAPI, Uvicorn, and Pytest.
 
 ### 4. **Run the FastAPI Application**
-
 To run the FastAPI application, use the following command:
 
 ```bash
