@@ -1,22 +1,25 @@
 # ARQUITECTURA ORIENTADA A SERVICIOS 
 ## Curso 2025-26 
 ## FigursAPI Project
+Una entidad de figuras de anime y comic.
+Utilizaremos una base de datos Docker, para almacenar los datos (usando .json como objetos dentro de la base de datos).
 
-Utilizaremos una base de datos Docker, para almacenar los datos.
-Los POST’s y GET que podremos utilizar:
-GET /figuras (Recoge todas las figuras sin categorizar)
-GET /figuras/2 (Por ID)
-GET /figuras?categoria=anime (Mediante un parámetro)
 
-POST /figuras
-Content-Type: application/json
 
+POST /figuras, donde que tiene la sigueinte estructura
+  ```json
 {
   "nombre": "Luffy Gear 5",
   "precio": 60.00,
   "stock": 8,
   "categoria": "Anime"
 }
+  ```
+
+Se podra hacer filtrado mediante ID, y categoria(anime, comic) (con '?' para buscar mediante parametros)
+
+GET /figuras (Recoge todas las figuras sin filtros)
+
 
 ## Project Setup
 
