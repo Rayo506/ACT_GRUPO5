@@ -8,14 +8,16 @@ Utilizaremos una base de datos Docker, para almacenar los datos (usando .json co
 
 Grupo 5
 Integrantes: Josep Fiestas, Jordi Montero, Jordi Herrera, Víctor López, Carles Pellitero
-3) Objectivo del proyecto
 
-4) Avance realizado: [En este punto detallar lo que se ha implementado y los pasos que tengo que hacer para probarlo]
+
+2) Objectivo del proyecto
+
+3) Avance realizado: [En este punto detallar lo que se ha implementado y los pasos que tengo que hacer para probarlo]
 
 Modificacion del README (expecificaciones y facilitación de runear en github)
 
 
-6) Próximos pasos
+4) Próximos pasos
 
 Vamos ha realizar un HTML y CSS
 
