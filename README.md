@@ -18,6 +18,7 @@ Modificacion del README (expecificaciones y facilitación de runear en github)
 6) Próximos pasos
 
 Vamos ha realizar un HTML y CSS
+
 Teniendo tambien un JSON con la estructura de nuestros elementos (Figuras.json)
 
 POST /figuras, donde que tiene la sigueinte estructura
