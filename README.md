@@ -38,15 +38,5 @@ Se podra hacer filtrado mediante ID, y categoria(anime, comic) (con '?' para bus
 GET /figuras (Recoge todas las figuras sin filtros)
 
 
-## Project Setup
-
-### 1. **Clone the Project**
-
-First, clone the project repository to your local machine:
-
-```bash
-git clone https://github.com/mcastrol/aossample.git
-cd aossample
-```
 ## PARA SABER COMO FUNCIONA EL RUN DIRECTO DESDE GITHUB
 https://docs.github.com/es/codespaces/quickstart 
