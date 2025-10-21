@@ -12,6 +12,8 @@ Integrantes: Josep Fiestas, Jordi Montero, Jordi Herrera, Víctor López, Carles
 
 2) Objectivo del proyecto
 
+Web Service de Figuras de Anime y Comic
+
 3) Avance realizado: [En este punto detallar lo que se ha implementado y los pasos que tengo que hacer para probarlo]
 
 Modificacion del README (expecificaciones y facilitación de runear en github)
