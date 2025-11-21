@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Boceto — Tienda Figuras (estructura)</title>
+  <!--
+    Este archivo es solo ESTRUCTURA / BOZETO. Contiene secciones semánticas y muchos
+    comentarios que indican tareas futuras o puntos de integración con AWS u otros servicios.
+
+    Objetivo: tener una base muy ligera para implementar más cosas después.
+    - Muy poco CSS/JS implementado: solo lo imprescindible para ver la estructura.
+    - Muchísimos comentarios "TODO" y sugerencias.
+  -->
+  <style>
+    /* Estilos mínimos: sólo para visualizar la estructura. Cambia/borra cuando implementes. */
+    :root{--muted:#6b7280}
+    body{font-family:system-ui,Segoe UI,Arial;margin:0;padding:18px;color:#111}
+    header, footer{padding:12px 18px;border-radius:8px;background:#f3f4f6}
+    main{max-width:1100px;margin:18px auto}
+    nav{display:flex;gap:12px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
+    .card{padding:12px;border:1px dashed #d1d5db;border-radius:8px;background:#fff}
+    .placeholder{height:120px;background:linear-gradient(90deg,#eef2ff,#fff);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+    .muted{color:var(--muted);font-size:13px}
+    /* Helpers */
+    code{background:#eef; padding:2px 6px;border-radius:4px}
+  </style>
+</head>
+<body>
+  <!-- HEADER: marca, navegación y acciones globales -->
+  <header>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <div>
+        <h2 style="margin:0">[Nombre Tienda]</h2>
+        <div class="muted">Boceto — estructura básica (figuras, merch)</div>
+      </div>
+      <nav aria-label="Menú principal">
+        <!-- TODO: añadir enlaces reales cuando haya páginas -> /catalog, /producto, /checkout, /admin -->
+        <a href="#">Catálogo</a>
+        <a href="#">Ofertas</a>
+        <a href="#">Contacto</a>
+        <!-- TODO: botón de login conectado a Cognito o similar -->
+      </nav>
+    </div>
+    <!-- FUTURO: aquí podría ir un buscador global (con index en Elasticsearch / OpenSearch o Algolia) -->
+  </header>
+
+  <main>
+    <!-- HERO / Resumen -->
+    <section aria-labelledby="hero-title" style="margin-top:12px">
+      <h3 id="hero-title">Boceto / Estructura</h3>
+      <p class="muted">Este documento contiene la maqueta HTML mínima y comentarios con ideas para integraciones futuras (AWS/API/Gestion de datos).</p>
+      <!-- TODO: mostrar banner administrable (CMS como Amplify + S3 / Headless CMS) -->
+    </section>
+
+    <!-- BARRA DE CONTROLES: búsqueda, filtros, orden -->
+    <section aria-label="Filtros y búsqueda" style="margin-top:18px">
+      <!-- Implementación mínima: inputs sin lógica. En el futuro: vincular a API Gateway -->
+      <div style="display:flex;gap:8px;align-items:center">
+        <input aria-label="buscar" placeholder="Buscar figura, personaje o serie..." />
+        <select aria-label="categoría">
+          <option>Todas</option>
+          <option>Shonen</option>
+          <option>Seinen</option>
+          <option>Comics</option>
+          <option>Merch</option>
+        </select>
+        <select aria-label="orden">
+          <option>Más populares</option>
+          <option>Precio ↑</option>
+          <option>Precio ↓</option>
+        </select>
+      </div>
+
+      <!-- TODO: conectar estos controles con una API REST (API Gateway -> Lambda) o GraphQL (AppSync). -->
+      <!-- Nota: si usas GraphQL (AppSync), puedes hacer queries paginadas y filtros complejos desde el cliente. -->
+    </section>
+
+    <!-- CATÁLOGO: lista semántica de productos -->
+    <section aria-labelledby="catalogo" style="margin-top:18px">
+      <h4 id="catalogo">Catálogo (ejemplos) — Estructura mínima</h4>
+
+      <!-- Usamos <ul> para contenido semántico. Cada <li> representará un producto. -->
+      <ul class="grid" id="productList">
+        <!-- Producto 1 (solo estructura):
+             - data-* attributes útiles para manipular desde JS o para generación server-side.
+             - En el futuro: rellenar con datos desde DynamoDB o backend.
+        -->
+        <li class="card" data-id="prod-001" data-price="59.99" data-category="shonen">
+          <div class="placeholder">Imagen (placeholder)</div>
+          <h5>Nombre Producto — [Título]</h5>
+          <p class="muted">Serie: Nombre · Escala: 1/8 · Edición: estándar</p>
+          <!-- FUTURO: enlace a /producto/{id} con servidor que devuelva HTML o una SPA dinámica -->
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button disabled>Agregar (placeholder)</button>
+            <button disabled>Ver</button>
+          </div>
+        </li>
+
+        <!-- Producto 2 -->
+        <li class="card" data-id="prod-002" data-price="39.50" data-category="merch">
+          <div class="placeholder">Imagen (placeholder)</div>
+          <h5>Taza — Emblema</h5>
+          <p class="muted">Merch oficial · Cerámica</p>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button disabled>Agregar (placeholder)</button>
+            <button disabled>Ver</button>
+          </div>
+        </li>
+
+        <!-- Añade más <li> como plantilla para tu catálogo -->
+      </ul>
+
+      <!-- TODO:
+        - Implementar paginación (cliente o servidor).
+        - Soporte para imágenes en S3 (presigned URLs) o CDN (CloudFront).
+        - Añadir etiquetas/colecciones para filtrado avanzado.
+      -->
+    </section>
+
+    <!-- CARRO / CHECKOUT: estructura mínima -->
+    <section aria-labelledby="carrito" style="margin-top:18px">
+      <h4 id="carrito">Carrito (estructura mínima)</h4>
+      <div class="card">
+        <!-- FUTURO: este panel se convertirá en un componente dinámico y persistirá en localStorage o en DynamoDB por usuario -->
+        <p class="muted">Items: <code id="cart-count">0</code> — Total: <code id="cart-total">€0.00</code></p>
+        <!-- TODO: integrar con pasarela de pagos (Stripe, PayPal). Si lo desplegas en AWS: Lambda -> Backend seguro -> Stripe -->
+      </div>
+    </section>
+
+    <!-- PÁGINA PRODUCTO (plantilla): solo estructura -->
+    <section aria-labelledby="producto-template" style="margin-top:18px">
+      <h4 id="producto-template">Plantilla página producto</h4>
+      <p class="muted">Estructura mínima que debería tener la página de detalle:</p>
+      <ol>
+        <li>Galería de imágenes (S3 + CloudFront)</li>
+        <li>Título, precio, variantes</li>
+        <li>Descripción larga</li>
+        <li>Reseñas / valoraciones (opcional: AppSync o servicios externos)</li>
+        <li>CTA: Añadir al carrito / Comprar ahora</li>
+      </ol>
+    </section>
+
+    <!-- ADMIN / BACKOFFICE: guía rápida -->
+    <section aria-labelledby="admin" style="margin-top:18px">
+      <h4 id="admin">Notas para Admin / Datos</h4>
+      <p class="muted">Ideas de integración y flujos:</p>
+      <ul>
+        <li>Datos productos: DynamoDB (clave = productId). Backup con S3 o snapshots.</li>
+        <li>Imágenes y assets: almacenar en S3 + servir vía CloudFront.</li>
+        <li>API: API Gateway -> Lambda (Node/Python) que haga CRUD sobre DynamoDB.</li>
+        <li>Autenticación: Cognito para usuarios; IAM roles para Lambdas y accesos restringidos.</li>
+        <li>Billing / pagos: integrar Stripe en backend (no desde frontend directamente sin servidor).</li>
+        <li>CI/CD: AWS Amplify o GitHub Actions -> despliegue a S3/CloudFront.</li>
+      </ul>
+
+      <!-- TODO: documentar endpoints REST mínimos, por ejemplo:
+        GET /products?page=1&limit=20&category=shonen
+        GET /products/{id}
+        POST /cart (guardar carrito para usuario autenticado)
+        POST /checkout (inicia flujo con pasarela)
+      -->
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="muted">Plantilla estructural — contiene muchos comments y TODOs para tu trabajo en la asignatura.</div>
+    <!-- FUTURO: enlazar a README o documentación con diagramas (arquitectura) y políticas IAM mínimas para practicar con AWS -->
+  </footer>
+
+  <!-- JS mínimo: sólo helpers para que veas IDs y futuros puntos de conexión. -->
+  <script>
+    // Punto de integración 1: carga inicial del catálogo.
+    // Actualmente NO hace llamadas. En el futuro reemplaza esta función para llamar a tu API.
+    function loadCatalogSample(){
+      // Ejemplo: fetch('/api/products') -> renderizar resultados en #productList
+      console.log('loadCatalogSample: aquí llamarías a tu API para obtener productos');
+    }
+
+    // Punto de integración 2: carrito (simple estructura para cuando empieces)
+    const cart = [];
+    function addToCart(productId){
+      // TODO: lógica de añadir -> actualizar DOM y persistir en localStorage o backend
+      console.log('addToCart', productId);
+    }
+
+    // Inicialización ligera
+    document.addEventListener('DOMContentLoaded', ()=>{
+      loadCatalogSample();
+    });
+
+    // CONSEJOS PRÁCTICOS (a modo de checklist):
+    // - Empieza por desplegar este HTML en S3 (static hosting) y probar CloudFront.
+    // - Añade un endpoint GET /products en API Gateway -> Lambda para devolver JSON de prueba.
+    // - Conecta el frontend a ese endpoint y renderiza dinámicamente.
+    // - Cuando funcione, cambia los datos a DynamoDB y añade autenticación con Cognito.
+    // - Versiona infra con CloudFormation / CDK y documenta permisos IAM mínimos.
+  </script>
+</body>
+
+</html>
