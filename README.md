@@ -16,7 +16,7 @@ Web Service de Figuras de Anime y Comic
 
 3) Avance realizado: [En este punto detallar lo que se ha implementado y los pasos que tengo que hacer para probarlo]
 
-Modificacion del README (expecificaciones y facilitación de runear en github)
+Modificacion del README (hemos cambiado el html, hemos modificado algunas partes de los test pero no runea la pagina web, a futuro separaremos el css del html)
 
 
 4) Próximos pasos
