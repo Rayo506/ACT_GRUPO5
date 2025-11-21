@@ -37,7 +37,7 @@ POST /figuras, donde que tiene la sigueinte estructura
 
 Se podra hacer filtrado mediante ID, y categoria(anime, comic) (con '?' para buscar mediante parametros)
 
-GET /figuras (Recoge todas las figuras sin filtros)
+GET /store (Recoge todas las figuras sin filtros)
 
 
 ## PARA SABER COMO FUNCIONA EL RUN DIRECTO DESDE GITHUB
