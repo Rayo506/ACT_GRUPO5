@@ -1,125 +1,180 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>BlueOtaku Figures</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<header>
-    <h1>BlueOtaku Figures</h1>
-    <nav>
-        <a href="#catalogo">Catálogo</a>
-        <a href="#carrito">Carrito</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
-</header>
+    <header>
+        <h1>BlueOtaku Figures</h1>
+        <nav>
+            <a href="#catalogo">Catálogo</a>
+            <a href="#carrito">Carrito</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
 
-<main>
+    <main>
 
-    <section id="quienes-somos">
-        <h2>¿Quiénes somos?</h2>
-        <p>
-            BlueOtaku Figures es una tienda especializada en figuras coleccionables de anime y cómic.
-            Nuestro objetivo es ofrecer productos de calidad para fans y coleccionistas.
-        </p>
-    </section>
+        <section id="quienes-somos">
+            <h2>¿Quiénes somos?</h2>
+            <p>
+                BlueOtaku Figures es una tienda especializada en figuras coleccionables de anime y cómic.
+                Nuestro objetivo es ofrecer productos de calidad para fans y coleccionistas.
+            </p>
+        </section>
 
-    <section id="catalogo">
-        <h2>Catálogo</h2>
-
-        <div class="catalogo-grid">
-            <div class="figura">
-                <h3>Luffy Gear 5</h3>
-                <p><strong>Precio:</strong> 60€</p>
-                <p><strong>Stock:</strong> 8</p>
-                <p><strong>Categoría:</strong> Anime</p>
-                <button onclick="addToCart('Luffy Gear 5', 60)">Añadir al carrito</button>
+        <section id="catalogo">
+            <h2>Catálogo</h2>
+            <div class="catalogo-grid" id="catalogo-grid">
+                <!-- Las figuras se cargarán aquí dinámicamente -->
             </div>
-
-            <div class="figura">
-                <h3>Batman Dark Knight</h3>
-                <p><strong>Precio:</strong> 75€</p>
-                <p><strong>Stock:</strong> 5</p>
-                <p><strong>Categoría:</strong> Comic</p>
-                <button onclick="addToCart('Batman Dark Knight', 75)">Añadir al carrito</button>
+            <div style="margin-top:20px; text-align:center;">
+                <button id="prev-btn">Anterior</button>
+                <button id="next-btn">Siguiente</button>
             </div>
-        </div>
-    </section>
+            <p id="page-info" style="text-align:center; margin-top:10px;"></p>
+        </section>
 
-    <section id="carrito">
-        <h2>Carrito</h2>
-        <ul id="cart-list"></ul>
-        <p>Total de artículos: <span id="items">0</span></p>
-        <p>Precio total: <span id="total">0.00</span> €</p>
-    </section>
+        <section id="carrito">
+            <h2>Carrito</h2>
+            <ul id="cart-list"></ul>
+            <p>Total de artículos: <span id="items">0</span></p>
+            <p>Precio total: <span id="total">0.00</span> €</p>
+        </section>
 
-</main>
+    </main>
 
-<footer id="contacto">
-    <p>📧 contacto@blueotaku.com</p>
-    <p>📞 +34 600 123 456</p>
-    <p>📍 Calle Falsa 123, Barcelona</p>
-</footer>
+    <footer id="contacto">
+        <p>📧 contacto@blueotaku.com</p>
+        <p>📞 +34 600 123 456</p>
+        <p>📍 Calle Falsa 123, Barcelona</p>
+    </footer>
 
-<script>
-    let cart = [];
-    let total = 0;
+    <script>
+        let cart = [];
+        let total = 0;
+        let figures = [];      // Todas las figuras
+        let currentPage = 1;
+        const itemsPerPage = 5;
 
-    function loadCart() {
-        const storedCart = localStorage.getItem("cart");
-        if (storedCart) {
-            cart = JSON.parse(storedCart);
+        // ----------------- Carrito -----------------
+        function loadCart() {
+            const storedCart = localStorage.getItem("cart");
+            if (storedCart) {
+                cart = JSON.parse(storedCart);
+                calculateTotal();
+                updateCartUI();
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+
+        function calculateTotal() {
+            total = cart.reduce((sum, item) => sum + item.precio, 0);
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById("cart-list");
+            list.innerHTML = "";
+            cart.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${item.nombre} - ${item.precio}€`;
+                const btn = document.createElement("button");
+                btn.textContent = "❌";
+                btn.onclick = () => removeFromCart(index);
+                li.appendChild(btn);
+                list.appendChild(li);
+            });
+            document.getElementById("items").textContent = cart.length;
+            document.getElementById("total").textContent = total.toFixed(2);
+        }
+
+        function addToCart(nombre, precio) {
+            cart.push({ nombre, precio });
             calculateTotal();
             updateCartUI();
+            saveCart();
         }
-    }
 
-    function saveCart() {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            calculateTotal();
+            updateCartUI();
+            saveCart();
+        }
 
-    function calculateTotal() {
-        total = cart.reduce((sum, item) => sum + item.precio, 0);
-    }
+        // ----------------- Figuras y paginación -----------------
+        async function loadFigures() {
+            try {
+                const response = await fetch("../figuras.json");
+                figures = await response.json();
+                renderPage(currentPage);
+            } catch (err) {
+                console.error("Error cargando figuras:", err);
+            }
+        }
 
-    function updateCartUI() {
-        const list = document.getElementById("cart-list");
-        list.innerHTML = "";
+        function renderPage(page) {
+            const grid = document.getElementById("catalogo-grid");
+            grid.innerHTML = "";
 
-        cart.forEach((item, index) => {
-            const li = document.createElement("li");
-            li.textContent = `${item.nombre} - ${item.precio}€`;
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageFigures = figures.slice(start, end);
 
-            const btn = document.createElement("button");
-            btn.textContent = "❌";
-            btn.onclick = () => removeFromCart(index);
+            pageFigures.forEach(fig => {
+                const div = document.createElement("div");
+                div.classList.add("figura");
+                div.innerHTML = `
+            <h3>${fig.nombre}</h3>
+            <p><strong>Precio:</strong> ${fig.precio}€</p>
+            <p><strong>Stock:</strong> ${fig.stock}</p>
+            <p><strong>Categoría:</strong> ${fig.categoria}</p>
+            <button>Añadir al carrito</button>
+        `;
+                div.querySelector("button").onclick = () => addToCart(fig.nombre, fig.precio);
+                grid.appendChild(div);
+            });
 
-            li.appendChild(btn);
-            list.appendChild(li);
-        });
+            // Información de página
+            const totalPages = Math.ceil(figures.length / itemsPerPage);
+            document.getElementById("page-info").textContent = `Página ${page} de ${totalPages}`;
 
-        document.getElementById("items").textContent = cart.length;
-        document.getElementById("total").textContent = total.toFixed(2);
-    }
+            // Botones
+            document.getElementById("prev-btn").disabled = page === 1;
+            document.getElementById("next-btn").disabled = page === totalPages;
+        }
 
-    function addToCart(nombre, precio) {
-        cart.push({ nombre, precio });
-        calculateTotal();
-        updateCartUI();
-        saveCart();
-    }
+        // Botones de navegación
+        document.getElementById("prev-btn").onclick = () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderPage(currentPage);
+            }
+        };
 
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        calculateTotal();
-        updateCartUI();
-        saveCart();
-    }
+        document.getElementById("next-btn").onclick = () => {
+            const totalPages = Math.ceil(figures.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderPage(currentPage);
+            }
+        };
 
-    window.onload = loadCart;
-</script>
+        // ----------------- Inicialización -----------------
+        window.onload = () => {
+            loadCart();
+            loadFigures();
+        };
+    </script>
 
 </body>
+
 </html>
