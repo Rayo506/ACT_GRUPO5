@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #eaf3fb;
+}
+
+/* HEADER */
+header {
+    background-color: #b3d9ff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    color: #003366;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #003366;
+    font-weight: bold;
+}
+
+/* SECCIONES */
+main {
+    padding: 40px;
+}
+
+section {
+    margin-bottom: 60px;
+}
+
+h2 {
+    color: #003366;
+}
+
+/* CATÁLOGO */
+.catalogo-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.figura {
+    background-color: #ffffff;
+    width: 220px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.figura h3 {
+    margin-top: 0;
+}
+
+.figura button {
+    margin-top: 10px;
+    padding: 8px;
+    width: 100%;
+    background-color: #3399ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.figura button:hover {
+    background-color: #1a8cff;
+}
+
+/* CARRITO */
+#carrito {
+    background-color: #d6ebff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* FOOTER */
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
