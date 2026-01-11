@@ -20,6 +20,9 @@ app.add_middleware(
 app.include_router(products.router)
 
 @app.get("/")
+def root():
+    return {"message": "API FUNCIONANDO"}
+            
 def read_root():
     return {"message": "Bienvenido a FigursAPI", "docs": "/docs"}
 

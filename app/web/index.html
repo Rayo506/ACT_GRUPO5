@@ -113,7 +113,10 @@
         // ----------------- Figuras y paginación -----------------
         async function loadFigures() {
             try {
-                const response = await fetch("../figuras.json");
+                const response = await fetch("/web/figuras.json")
+                    .then(res => res.json())
+                    .then(data => renderCatalog(data));
+
                 figures = await response.json();
                 renderPage(currentPage);
             } catch (err) {

@@ -38,4 +38,3 @@ def delete_product(product_id: int):
 def search(category: str | None = None):
     results = product_store.search_products(category)
     return results
-s

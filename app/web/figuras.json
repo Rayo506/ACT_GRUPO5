@@ -1,0 +1,182 @@
+[
+  {
+    "nombre": "Luffy Gear 5",
+    "precio": 60.00,
+    "stock": 8,
+    "categoria": "Anime"
+  },
+  {
+    "nombre": "Goku Super Saiyan Blue",
+    "precio": 55.00,
+    "stock": 12,
+    "categoria": "Anime"
+  },
+  {
+    "nombre": "Naruto Sage Mode",
+    "precio": 50.00,
+    "stock": 10,
+    "categoria": "Anime"
+  },
+  {
+    "nombre": "Sasuke Rinnegan",
+    "precio": 52.00,
+    "stock": 9,
+    "categoria": "Anime"
+  },
+  {
+    "nombre": "Tanjiro Kamado",
+    "precio": 48.00,
+    "stock": 11,
+    "categoria": "Anime"
+  },
+  {
+    "nombre": "Nezuko Kamado",
+    "precio": 47.00,
+    "stock": 7,
+    "categoria": "Anime"
+  },
+  {
+    "nombre": "Levi Ackerman",
+    "precio": 58.00,
+    "stock": 10,
+    "categoria": "Anime"
+  },
+  {
+    "nombre": "Eren Jaeger Titan",
+    "precio": 65.00,
+    "stock": 6,
+    "categoria": "Anime"
+  },
+  {
+    "nombre": "Sailor Moon",
+    "precio": 45.00,
+    "stock": 14,
+    "categoria": "Anime"
+  },
+  {
+    "nombre": "Gojo Satoru",
+    "precio": 59.00,
+    "stock": 9,
+    "categoria": "Anime"
+  },
+  {
+    "nombre": "Spider-Man Classic Suit",
+    "precio": 70.00,
+    "stock": 10,
+    "categoria": "Marvel"
+  },
+  {
+    "nombre": "Iron Man Mark 85",
+    "precio": 85.00,
+    "stock": 6,
+    "categoria": "Marvel"
+  },
+  {
+    "nombre": "Captain America Endgame",
+    "precio": 75.00,
+    "stock": 8,
+    "categoria": "Marvel"
+  },
+  {
+    "nombre": "Thor Love and Thunder",
+    "precio": 78.00,
+    "stock": 7,
+    "categoria": "Marvel"
+  },
+  {
+    "nombre": "Black Panther Wakanda Forever",
+    "precio": 72.00,
+    "stock": 9,
+    "categoria": "Marvel"
+  },
+  {
+    "nombre": "Doctor Strange Multiverse",
+    "precio": 80.00,
+    "stock": 5,
+    "categoria": "Marvel"
+  },
+  {
+    "nombre": "Scarlet Witch WandaVision",
+    "precio": 68.00,
+    "stock": 8,
+    "categoria": "Marvel"
+  },
+  {
+    "nombre": "Deadpool Deluxe",
+    "precio": 65.00,
+    "stock": 10,
+    "categoria": "Marvel"
+  },
+  {
+    "nombre": "Venom Symbiote Edition",
+    "precio": 77.00,
+    "stock": 6,
+    "categoria": "Marvel"
+  },
+  {
+    "nombre": "Loki TVA Variant",
+    "precio": 62.00,
+    "stock": 9,
+    "categoria": "Marvel"
+  },
+  {
+    "nombre": "Batman The Dark Knight",
+    "precio": 75.00,
+    "stock": 8,
+    "categoria": "DC"
+  },
+  {
+    "nombre": "Superman Man of Steel",
+    "precio": 70.00,
+    "stock": 10,
+    "categoria": "DC"
+  },
+  {
+    "nombre": "Wonder Woman 1984",
+    "precio": 68.00,
+    "stock": 9,
+    "categoria": "DC"
+  },
+  {
+    "nombre": "The Flash Barry Allen",
+    "precio": 65.00,
+    "stock": 7,
+    "categoria": "DC"
+  },
+  {
+    "nombre": "Aquaman King of Atlantis",
+    "precio": 72.00,
+    "stock": 6,
+    "categoria": "DC"
+  },
+  {
+    "nombre": "Cyborg Justice League",
+    "precio": 60.00,
+    "stock": 8,
+    "categoria": "DC"
+  },
+  {
+    "nombre": "Harley Quinn Suicide Squad",
+    "precio": 63.00,
+    "stock": 9,
+    "categoria": "DC"
+  },
+  {
+    "nombre": "Joker Heath Ledger",
+    "precio": 80.00,
+    "stock": 5,
+    "categoria": "DC"
+  },
+  {
+    "nombre": "Green Lantern Hal Jordan",
+    "precio": 66.00,
+    "stock": 7,
+    "categoria": "DC"
+  },
+  {
+    "nombre": "Shazam Fury of the Gods",
+    "precio": 64.00,
+    "stock": 8,
+    "categoria": "DC"
+  }
+]
