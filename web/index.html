@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BlueOtaku Figures</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <h1>BlueOtaku Figures</h1>
+        <nav>
+            <a href="#catalogo">Catálogo</a>
+            <a href="#carrito">Carrito</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ===== QUIÉNES SOMOS ===== -->
+        <section id="quienes-somos">
+            <h2>¿Quiénes somos?</h2>
+            <p>
+                BlueOtaku Figures es una tienda especializada en figuras coleccionables de anime y cómic.
+                Nuestro objetivo es ofrecer productos de calidad para fans y coleccionistas.
+            </p>
+        </section>
+
+        <!-- ===== CATÁLOGO ===== -->
+        <section id="catalogo">
+            <h2>Catálogo</h2>
+
+            <div class="catalogo-grid" id="catalogo-grid"></div>
+
+            <div class="paginacion">
+                <button id="prev-btn">Anterior</button>
+                <span id="page-info"></span>
+                <button id="next-btn">Siguiente</button>
+            </div>
+        </section>
+
+        <!-- ===== CARRITO ===== -->
+        <section id="carrito">
+            <h2>Carrito</h2>
+            <ul id="cart-list"></ul>
+            <p>Total de artículos: <strong><span id="items">0</span></strong></p>
+            <p>Precio total: <strong><span id="total">0.00</span> €</strong></p>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="contacto">
+        <p>📧 contacto@blueotaku.com</p>
+        <p>📞 +34 600 123 456</p>
+        <p>📍 Calle Falsa 123, Barcelona</p>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ---------- VARIABLES ----------
+        let figures = [];
+        let currentPage = 1;
+        const itemsPerPage = 5;
+
+        let cart = [];
+        let total = 0;
+
+        // ---------- CARRITO ----------
+        function loadCart() {
+            const storedCart = localStorage.getItem("cart");
+            if (storedCart) {
+                cart = JSON.parse(storedCart);
+                calculateTotal();
+                updateCartUI();
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+
+        function calculateTotal() {
+            total = cart.reduce((sum, item) => sum + item.precio, 0);
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById("cart-list");
+            list.innerHTML = "";
+
+            cart.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${item.nombre} - ${item.precio} € `;
+
+                const btn = document.createElement("button");
+                btn.textContent = "❌";
+                btn.onclick = () => removeFromCart(index);
+
+                li.appendChild(btn);
+                list.appendChild(li);
+            });
+
+            document.getElementById("items").textContent = cart.length;
+            document.getElementById("total").textContent = total.toFixed(2);
+        }
+
+        function addToCart(nombre, precio) {
+            if (cart.some(item => item.nombre === nombre)) return;
+            cart.push({ nombre, precio });
+            calculateTotal();
+            updateCartUI();
+            saveCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            calculateTotal();
+            updateCartUI();
+            saveCart();
+        }
+
+        // ---------- FIGURAS ----------
+        async function loadFigures() {
+            try {
+                const response = await fetch("/web/figuras.json");
+                figures = await response.json();
+                renderPage(currentPage);
+            } catch (error) {
+                console.error("Error cargando figuras:", error);
+            }
+        }
+
+        function renderPage(page) {
+            const grid = document.getElementById("catalogo-grid");
+            grid.innerHTML = "";
+
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageFigures = figures.slice(start, end);
+
+            pageFigures.forEach(fig => {
+                const div = document.createElement("div");
+                div.className = "figura";
+                div.innerHTML = `
+                    <h3>${fig.nombre}</h3>
+                    <p><strong>Precio:</strong> ${fig.precio} €</p>
+                    <p><strong>Stock:</strong> ${fig.stock}</p>
+                    <p><strong>Categoría:</strong> ${fig.categoria}</p>
+                    <button>Añadir al carrito</button>
+                `;
+
+                div.querySelector("button").onclick =
+                    () => addToCart(fig.nombre, fig.precio);
+
+                grid.appendChild(div);
+            });
+
+            const totalPages = Math.ceil(figures.length / itemsPerPage);
+            document.getElementById("page-info").textContent =
+                `Página ${page} de ${totalPages}`;
+
+            document.getElementById("prev-btn").disabled = page === 1;
+            document.getElementById("next-btn").disabled = page === totalPages;
+        }
+
+        document.getElementById("prev-btn").onclick = () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderPage(currentPage);
+            }
+        };
+
+        document.getElementById("next-btn").onclick = () => {
+            const totalPages = Math.ceil(figures.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderPage(currentPage);
+            }
+        };
+
+        // ---------- INIT ----------
+        window.onload = () => {
+            loadCart();
+            loadFigures();
+        };
+    </script>
+
+</body>
+</html>
