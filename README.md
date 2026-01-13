@@ -33,11 +33,11 @@ Actualmente se ha implementado:
   - CRUD completo de figuras
   - Búsqueda por categoría
 - HTML funcional para mostrar las figuras
+- CSS separado
 - Tests automáticos con `pytest`
 - Uso de un archivo `figuras.json` como almacén local de datos
 
  Pendiente de mejora:
-- Separar el CSS del HTML
 - Mejorar la persistencia y sincronización con el JSON
 - Pulir la estructura final del frontend
 
