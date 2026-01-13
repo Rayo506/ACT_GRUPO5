@@ -1,45 +1,106 @@
-# ARQUITECTURA ORIENTADA A SERVICIOS 
-## Curso 2025-26 
+# ARQUITECTURA ORIENTADA A SERVICIOS
+## Curso 2025–2026  
 ## FigursAPI Project
-Una entidad de figuras de anime y comic.
-Utilizaremos una base de datos Docker, para almacenar los datos (usando .json como objetos dentro de la base de datos).
 
-1) Nombre del grupo e integrantes
+Proyecto de **Web Service para la gestión de figuras de Anime y Cómic**.  
+Los datos se almacenan de forma local utilizando un archivo **JSON**, que actúa como base de datos.
 
-Grupo 5
-Integrantes: Josep Fiestas, Jordi Montero, Jordi Herrera, Víctor López, Carles Pellitero
+---
 
+## 1️ Grupo e integrantes
 
-2) Objectivo del proyecto
+**Grupo 5**
 
-Web Service de Figuras de Anime y Comic
+- Josep Fiestas  
+- Jordi Montero  
+- Jordi Herrera  
+- Víctor López  
+- Carles Pellitero  
 
-3) Avance realizado: [En este punto detallar lo que se ha implementado y los pasos que tengo que hacer para probarlo]
+---
 
-Modificacion del README (hemos cambiado el html, hemos modificado algunas partes de los test pero no runea la pagina web, a futuro separaremos el css del html)
-Tenemos el HTML funcionando correctamente
-Nos falta modificar para que guarde en local y pueda leerlo la API en el JSON
+## 2️ Objetivo del proyecto
 
-4) Próximos pasos
+Desarrollar una **API REST con FastAPI** que permita gestionar un catálogo de figuras de Anime y Cómic, junto con una **interfaz web** para su visualización.
 
-Vamos ha realizar un HTML y CSS
+---
 
-Teniendo tambien un JSON con la estructura de nuestros elementos (Figuras.json)
+## 3️ Avance realizado
 
-POST /figuras, donde que tiene la sigueinte estructura
-  ```json
+Actualmente se ha implementado:
+
+- API REST con FastAPI:
+  - CRUD completo de figuras
+  - Búsqueda por categoría
+- HTML funcional para mostrar las figuras
+- Tests automáticos con `pytest`
+- Uso de un archivo `figuras.json` como almacén local de datos
+
+ Pendiente de mejora:
+- Separar el CSS del HTML
+- Mejorar la persistencia y sincronización con el JSON
+- Pulir la estructura final del frontend
+
+---
+
+## 4️ Próximos pasos
+
+- Separar correctamente **HTML / CSS / JS**
+- Mejorar la gestión del archivo `figuras.json`
+- Asegurar que todas las operaciones de la API:
+  - Crear
+  - Modificar
+  - Eliminar  
+  actualicen también el JSON
+
+---
+
+## 5️ Estructura del JSON (Figuras)
+
+Ejemplo de figura:
+
+```json
 {
   "nombre": "Luffy Gear 5",
   "precio": 60.00,
   "stock": 8,
   "categoria": "Anime"
 }
+
   ```
+## 6️ Endpoints disponibles
 
-Se podra hacer filtrado mediante ID, y categoria(anime, comic) (con '?' para buscar mediante parametros)
+### API Figuras
 
-GET /store (Recoge todas las figuras sin filtros)
+- **POST** `/figuras`  
+  Crear una nueva figura
 
+- **GET** `/figuras`  
+  Obtener todas las figuras almacenadas
+
+- **GET** `/figuras/{id}`  
+  Obtener una figura por su identificador
+
+- **PUT** `/figuras/{id}`  
+  Actualizar una figura existente
+
+- **DELETE** `/figuras/{id}`  
+  Eliminar una figura
+
+- **GET** `/figuras/search?category=Anime`  
+  Filtrar figuras por categoría (Anime, Comic, etc.)
+
+---
+
+## 7️ Pasos para ejecutar el proyecto (Visual Studio Code)
+
+### Requisitos previos
+
+- Python 3.10 o superior
+- Visual Studio Code
+- Sistema operativo Windows
+
+---
 
 ### Pasos para runear en VisualStudioCode
 ## Pasos previos
@@ -48,26 +109,36 @@ Entorno virtual (Windows)
 python -m venv venv
 
 Activar siempre
+```bash
 venv\Scripts\activate
-
+```
 Instalar dependencias
+```bash
 pip install -r requirements.txt
-
+```
+Ejecutar la API
+```bash
 uvicorn app.main:app --reload
-
-¡No ejecuta atencion podrias tener restricciones de seguridad de Windows!
+```
+**¡No ejecuta atencion podrias tener restricciones de seguridad de Windows!**
 Ejecutamos el PowerShell
+```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
 Nos preguntara si queremos cambiar la direccion, pondremos Y o S (depende del idioma)
 
 ## URL's para comprobar
-Página Web:
-http://127.0.0.1:8000/web/index.html
-JSON
-http://127.0.0.1:8000/web/figuras.json
-API Funciones:
-http://127.0.0.1:8000/docs
+- **Página Web (HTML)**  
+  [http://127.0.0.1:8000/web/index.html](http://127.0.0.1:8000/web/index.html)
+
+- **Archivo JSON (almacén local)**  
+  [http://127.0.0.1:8000/web/figuras.json](http://127.0.0.1:8000/web/figuras.json)
+
+- **Documentación interactiva de la API (Swagger)**  
+  [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 ## Test
 Ejecutar el codigo test
+```bash
 pytest
+```

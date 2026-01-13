@@ -1,17 +1,48 @@
+import json
 from typing import List, Optional, Dict
+from pathlib import Path
 from app.models.items import Product, ProductCreate, ProductUpdate
+
+DATA_FILE = Path("web/figuras.json")
+
 
 class ProductStore:
     def __init__(self):
         self.products: Dict[int, Product] = {}
         self.next_id: int = 1
+        self.load_from_json()
 
+    # ---------- JSON ----------
+    def load_from_json(self):
+        if not DATA_FILE.exists():
+            DATA_FILE.write_text("[]", encoding="utf-8")
+
+        data = json.loads(DATA_FILE.read_text(encoding="utf-8"))
+
+        for item in data:
+            item["id"] = self.next_id
+            product = Product(**item)
+            self.products[self.next_id] = product
+            self.next_id += 1
+
+
+    def save_to_json(self):
+        data = [p.dict() for p in self.products.values()]
+        DATA_FILE.write_text(
+            json.dumps(data, indent=4, ensure_ascii=False),
+            encoding="utf-8"
+        )
+
+    # ---------- CRUD ----------
     def create_product(self, product: ProductCreate) -> Product:
         product_dict = product.dict()
         product_dict["id"] = self.next_id
+
         new_product = Product(**product_dict)
         self.products[self.next_id] = new_product
         self.next_id += 1
+
+        self.save_to_json()
         return new_product
 
     def get_product(self, product_id: int) -> Optional[Product]:
@@ -23,15 +54,20 @@ class ProductStore:
     def update_product(self, product_id: int, product_update: ProductUpdate) -> Optional[Product]:
         if product_id not in self.products:
             return None
+
         existing = self.products[product_id]
         update_data = product_update.dict(exclude_unset=True)
+
         updated = existing.copy(update=update_data)
         self.products[product_id] = updated
+
+        self.save_to_json()
         return updated
 
     def delete_product(self, product_id: int) -> bool:
         if product_id in self.products:
             del self.products[product_id]
+            self.save_to_json()
             return True
         return False
 
