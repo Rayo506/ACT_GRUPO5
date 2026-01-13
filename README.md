@@ -17,7 +17,8 @@ Web Service de Figuras de Anime y Comic
 3) Avance realizado: [En este punto detallar lo que se ha implementado y los pasos que tengo que hacer para probarlo]
 
 Modificacion del README (hemos cambiado el html, hemos modificado algunas partes de los test pero no runea la pagina web, a futuro separaremos el css del html)
-
+Tenemos el HTML funcionando correctamente
+Nos falta modificar para que guarde en local y pueda leerlo la API en el JSON
 
 4) Próximos pasos
 
@@ -40,5 +41,33 @@ Se podra hacer filtrado mediante ID, y categoria(anime, comic) (con '?' para bus
 GET /store (Recoge todas las figuras sin filtros)
 
 
-## PARA SABER COMO FUNCIONA EL RUN DIRECTO DESDE GITHUB
-https://docs.github.com/es/codespaces/quickstart 
+### Pasos para runear en VisualStudioCode
+## Pasos previos
+Entorno virtual (Windows)
+¡En caso de no existir la carpeta venv!
+python -m venv venv
+
+Activar siempre
+venv\Scripts\activate
+
+Instalar dependencias
+pip install -r requirements.txt
+
+uvicorn app.main:app --reload
+
+¡No ejecuta atencion podrias tener restricciones de seguridad de Windows!
+Ejecutamos el PowerShell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Nos preguntara si queremos cambiar la direccion, pondremos Y o S (depende del idioma)
+
+## URL's para comprobar
+Página Web:
+http://127.0.0.1:8000/web/index.html
+JSON
+http://127.0.0.1:8000/web/figuras.json
+API Funciones:
+http://127.0.0.1:8000/docs
+
+## Test
+Ejecutar el codigo test
+pytest
