@@ -7,7 +7,7 @@ Los datos se almacenan de forma local utilizando un archivo **JSON**, que actúa
 
 ---
 
-## 1️ Grupo e integrantes
+## 1 Grupo e integrantes
 
 **Grupo 5**
 
@@ -19,13 +19,13 @@ Los datos se almacenan de forma local utilizando un archivo **JSON**, que actúa
 
 ---
 
-## 2️ Objetivo del proyecto
+## 2 Objetivo del proyecto
 
 Desarrollar una **API REST con FastAPI** que permita gestionar un catálogo de figuras de Anime y Cómic, junto con una **interfaz web** para su visualización.
 
 ---
 
-## 3️ Avance realizado
+## 3 Avance realizado
 
 Actualmente se ha implementado:
 
@@ -43,7 +43,7 @@ Actualmente se ha implementado:
 
 ---
 
-## 4️ Próximos pasos
+## 4 Próximos pasos
 
 - Separar correctamente **HTML / CSS / JS**
 - Mejorar la gestión del archivo `figuras.json`
@@ -55,7 +55,7 @@ Actualmente se ha implementado:
 
 ---
 
-## 5️ Estructura del JSON (Figuras)
+## 5 Estructura del JSON (Figuras)
 
 Ejemplo de figura:
 
@@ -68,7 +68,7 @@ Ejemplo de figura:
 }
 
   ```
-## 6️ Endpoints disponibles
+## 6 Endpoints disponibles
 
 ### API Figuras
 
@@ -92,7 +92,7 @@ Ejemplo de figura:
 
 ---
 
-## 7️ Pasos para ejecutar el proyecto (Visual Studio Code)
+## 7 Pasos para ejecutar el proyecto (Visual Studio Code)
 
 ### Requisitos previos
 
